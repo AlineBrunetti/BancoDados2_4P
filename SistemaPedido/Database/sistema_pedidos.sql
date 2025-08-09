@@ -96,3 +96,64 @@ INSERT INTO Produto (id, id_categoria, nome, preco) VALUES
 (18, 9, "Kit de Primeiros Socorros", 60.00),
 (19, 10, "Notebook Dell", 3500.00),
 (20, 10, "Mouse Gamer", 150.00);
+
+create table Pedido(
+	id integer auto_increment primary key,
+    id_consumidor integer,
+    data_hora_pedido timestamp default current_timestamp,
+    foreign key(id_consumidor) references Consumidor(id)
+);
+
+INSERT INTO Pedido (id_consumidor, data_hora_pedido) VALUES
+(1, '2025-07-01 10:30:00'),
+(2, '2025-07-01 11:00:00'),
+(3, '2025-07-02 09:15:00'),
+(4, '2025-07-02 14:45:00'),
+(5, '2025-07-03 16:20:00'),
+(6, '2025-07-04 12:00:00'),
+(7, '2025-07-05 13:30:00'),
+(8, '2025-07-05 15:10:00'),
+(9, '2025-07-06 08:50:00'),
+(10, '2025-07-06 17:00:00'),
+(11, '2025-07-07 10:00:00'),
+(12, '2025-07-07 11:30:00'),
+(13, '2025-07-08 09:00:00'),
+(14, '2025-07-08 16:45:00'),
+(15, '2025-07-09 14:15:00'),
+(16, '2025-07-10 13:00:00'),
+(17, '2025-07-10 18:20:00'),
+(18, '2025-07-11 10:10:00'),
+(19, '2025-07-11 15:40:00'),
+(20, '2025-07-12 09:30:00');
+
+create table DetalhePedido(
+	id integer auto_increment primary key,
+    id_pedido integer,
+    id_produto integer,
+    quantidade_comprada integer,
+    
+    foreign key(id_pedido) references Pedido(id),
+    foreign key(id_produto) references Produto(id)
+ );
+
+INSERT INTO DetalhePedido (id_pedido, id_produto, quantidade_comprada) VALUES
+(1, 1, 2),
+(1, 5, 1),
+(2, 3, 1),
+(2, 10, 3),
+(3, 7, 2),
+(4, 2, 1),
+(4, 14, 1),
+(5, 6, 2),
+(6, 4, 1),
+(7, 8, 1),
+(8, 9, 2),
+(9, 11, 3),
+(10, 12, 1),
+(11, 13, 1),
+(12, 15, 2),
+(13, 16, 1),
+(14, 17, 1),
+(15, 18, 4),
+(16, 19, 1),
+(17, 20, 2);
