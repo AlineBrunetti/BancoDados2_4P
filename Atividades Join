@@ -1,0 +1,39 @@
+Roda o banco de dados de SistemaPedido
+Atividades Join:
+
+1. Liste todos os pedidos mostrando o nome completo (nome e sobrenome) do
+consumidor que realizou cada um.
+```sql
+SELECT consumidor.id, consumidor.nome, consumidor.sobrenome
+FROM consumidor
+INNER JOIN pedido ON consumidor.id = pedido.id_consumidor;
+```
+
+2. Para cada pedido, mostre quais produtos foram comprados e em que
+quantidade.
+```sql
+SELECT detalhepedido.id_pedido, detalhepedido.quantidade_comprada, produto.nome
+FROM detalhepedido
+INNER JOIN produto ON produto.id = detalhepedido.id_produto;
+```
+
+3. Liste todos os produtos que não foram vendidos com a tabela
+DetalhesPedido.
+```sql
+SELECT produto.id, detalhepedido.id_produto FROM produto
+LEFT JOIN detalhepedido on produto.id = detalhepedido.id_produto WHERE detalhepedido.id_produto is null;
+```
+
+4. Calcule o valor total de cada pedido (preço × quantidade de cada item).
+
+```sql
+SELECT pedido.id, produto.nome, produto.preco, detalhepedido.quantidade_comprada  FROM pedido
+INNER JOIN detalhepedido on pedido.id = detalhepedido.id_pedido
+INNER JOIN produto on produto.id = detalhepedido.id_produto
+/*produto.preco * quantidade_comprada as valorTT*/;
+```
+
+Faltou:
+5. Exiba os 5 produtos mais vendidos em ordem decrescente de quantidade.
+6. Unifique em uma única lista todos os nomes de consumidores e nomes de
+produtos, sem duplicados.
